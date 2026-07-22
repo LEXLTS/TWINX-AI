@@ -1,47 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TWINX AI</title>
 
-    <link rel="stylesheet" href="style.css">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TWINX AI</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="app-container">
 
-        <div class="header">
-            <h1>🤖 TWINX AI</h1>
-            <p>Your Personal AI Assistant</p>
-        </div>
+    <!-- Header -->
 
-        <div id="chatBox" class="chat-box">
-            <div class="ai-message">
-                Hello! I am <b>TWINX AI</b>.<br>
-                How can I help you today?
+    <header class="top-bar">
+
+        <div class="logo-box">
+
+            <div class="logo">
+                ⚡
             </div>
+
         </div>
 
-        <div class="input-area">
-            <input
-                type="text"
-                id="userInput"
-                placeholder="Type your message...">
+        <div class="title-box">
 
-            <button id="sendBtn">
-                Send
-            </button>
+            <h1>TWINX AI</h1>
 
-            <button id="voiceBtn">
-                🎤
-            </button>
+            <p id="statusText">
+                🟢 Online
+            </p>
+
         </div>
+
+        <button class="menu-btn">
+            ☰
+        </button>
+
+    </header>
+
+    <!-- Chat Area -->
+
+    <main id="chatBox" class="chat-box">
+
+        <div class="ai-message">
+
+            <strong>TWINX AI</strong>
+
+            <br><br>
+
+            👋 Welcome back!
+
+            <br><br>
+
+            I'm ready to help you today.
+
+            <br><br>
+
+            Ask me anything.
+
+        </div>
+
+    </main>
+
+    <!-- Input Area -->
+
+    <div class="input-area">
+
+        <button class="attach-btn">
+            📎
+        </button>
+
+        <input
+        type="text"
+        id="userInput"
+        placeholder="Message TWINX AI...">
+
+        <button
+        id="voiceBtn">
+            🎤
+        </button>
+
+        <button
+        id="sendBtn">
+            ➤
+        </button>
 
     </div>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 
 </body>
+
 </html>
