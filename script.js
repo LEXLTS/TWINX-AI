@@ -22,11 +22,24 @@ function sendMessage() {
 
     userInput.value = "";
 
-    setTimeout(() => {
-        const reply = getAIReply(message);
-        addMessage(reply, "ai-message");
-        speak(reply);
-    }, 500);
+    const typing = document.createElement("div");
+typing.className = "ai-message";
+typing.innerHTML = "⌛ TWINX AI is typing...";
+
+chatBox.appendChild(typing);
+chatBox.scrollTop = chatBox.scrollHeight;
+
+setTimeout(() => {
+
+    chatBox.removeChild(typing);
+
+    const reply = getAIReply(message);
+
+    addMessage(reply, "ai-message");
+
+    speak(reply);
+
+}, 1000);
 }
 
 function addMessage(text, className) {
@@ -67,7 +80,7 @@ function getAIReply(message) {
     }
 
     if (message.includes("who created you")) {
-        return "⚡ I was created by TWINX with guidance from LEXI. Together we're building me step by step.";
+        return "⚡ I was created by TWINX with guidance from TWINXLEX. Together we're building me step by step.";
     }
 
     if (message.includes("who am i")) {
