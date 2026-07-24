@@ -228,3 +228,10 @@ transform:scale(1.08);
 background:#6fb52d;
 
 }
+.message-time{
+    font-size:12px;
+    color:#888;
+    margin-top:6px;
+    text-align:right;
+    font-style:italic;
+}
