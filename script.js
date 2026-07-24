@@ -43,26 +43,58 @@ function getAIReply(message) {
     message = message.toLowerCase();
 
     if (message.includes("hello") || message.includes("hi")) {
-        return "Hello! 👋 I am TWINX AI. Nice to meet you.";
+        return "Hello! 👋 Nice to see you again, TWINX!";
+    }
+
+    if (message.includes("good morning")) {
+        return "🌅 Good Morning, TWINX! I hope you have a wonderful day!";
+    }
+
+    if (message.includes("good afternoon")) {
+        return "☀️ Good Afternoon, TWINX! How can I help you today?";
+    }
+
+    if (message.includes("good evening")) {
+        return "🌆 Good Evening, TWINX! Welcome back!";
     }
 
     if (message.includes("how are you")) {
-        return "I'm doing great! Thank you for asking. 😊";
+        return "😊 I'm doing great! Thank you for asking.";
     }
 
-    if (message.includes("your name")) {
-        return "My name is TWINX AI, your personal assistant.";
+    if (message.includes("who are you")) {
+        return "🤖 I am TWINX AI, your personal AI assistant. I was built to help you learn, work, and grow every day.";
+    }
+
+    if (message.includes("who created you")) {
+        return "⚡ I was created by TWINX with guidance from LEXI. Together we're building me step by step.";
+    }
+
+    if (message.includes("who am i")) {
+        return "👤 You are TWINX, the creator of TWINX AI. You're learning programming and building your own AI assistant.";
     }
 
     if (message.includes("time")) {
-        return "Current time is: " + new Date().toLocaleTimeString();
+        return "🕒 Current time is: " + new Date().toLocaleTimeString();
     }
 
     if (message.includes("date")) {
-        return "Today's date is: " + new Date().toLocaleDateString();
+        return "📅 Today's date is: " + new Date().toLocaleDateString();
     }
 
-    return "I understand your message: \"" + message + "\". Soon I'll be connected to the internet and become much smarter! 🚀";
+    if (message.includes("forex")) {
+        return "📈 I can help you learn Forex trading. Soon I'll also be able to analyze charts and assist you with market observations.";
+    }
+
+    if (message.includes("thank")) {
+        return "💚 You're welcome, TWINX! I'm always here to help.";
+    }
+
+    if (message.includes("bye")) {
+        return "👋 Goodbye! Have a wonderful day. I'll be here when you come back.";
+    }
+
+    return "🤔 That's an interesting question. My knowledge is still growing. In a future version, I'll be connected to a real AI service so I can answer many more questions.";
 }
 
 // Voice Output
