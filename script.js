@@ -43,11 +43,28 @@ setTimeout(() => {
 }
 
 function addMessage(text, className) {
+
     const message = document.createElement("div");
     message.className = className;
-    message.innerHTML = text;
+
+    const messageText = document.createElement("div");
+    messageText.innerHTML = text;
+
+    const time = document.createElement("div");
+    time.className = "message-time";
+
+    const now = new Date();
+
+    time.innerHTML = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    message.appendChild(messageText);
+    message.appendChild(time);
 
     chatBox.appendChild(message);
+
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
