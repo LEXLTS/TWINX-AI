@@ -167,3 +167,28 @@ if (SpeechRecognition) {
     voiceBtn.innerHTML = "❌";
 
 }
+
+
+// ===============================
+// Smart Welcome Message
+// ===============================
+
+window.onload = function () {
+
+    const hour = new Date().getHours();
+
+    let greeting = "";
+
+    if (hour >= 5 && hour < 12) {
+        greeting = "🌅 Good Morning, TWINX!<br><br>I hope you have a wonderful day.<br><br>How can I help you today?";
+    } else if (hour >= 12 && hour < 17) {
+        greeting = "☀️ Good Afternoon, TWINX!<br><br>Ready to continue building your dreams?";
+    } else if (hour >= 17 && hour < 21) {
+        greeting = "🌆 Good Evening, TWINX!<br><br>Welcome back! What shall we build today?";
+    } else {
+        greeting = "🌙 Good Night, TWINX!<br><br>Don't forget to get enough rest.<br><br>Tomorrow we'll build something even more amazing!";
+    }
+
+    addMessage(greeting, "ai-message");
+
+};
