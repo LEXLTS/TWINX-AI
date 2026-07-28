@@ -13,7 +13,7 @@ userInput.addEventListener("keypress", function(event) {
     }
 });
 
-function sendMessage() {
+async function sendMessage() {
     const message = userInput.value.trim();
 
     if (message === "") return;
@@ -29,15 +29,33 @@ typing.innerHTML = "⌛ TWINX AI is typing...";
 chatBox.appendChild(typing);
 chatBox.scrollTop = chatBox.scrollHeight;
 
-setTimeout(() => {
+setTimeout(async () => {
 
     chatBox.removeChild(typing);
 
-    const reply = getAIReply(message);
+    try {
 
-    addMessage(reply, "ai-message");
+    const response = await fetch("https://twinx-ai-api.letchus43.workers.dev", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            prompt: message
+        })
+    });
 
-    speak(reply);
+    const data = await response.json();
+
+    addMessage(data.reply, "ai-message");
+
+    speak(data.reply);
+
+} catch (error) {
+
+    addMessage("❌ Unable to connect to TWINX AI.", "ai-message");
+
+}
 
 }, 1000);
 }
