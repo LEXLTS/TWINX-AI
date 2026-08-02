@@ -123,24 +123,24 @@ background:#f6f8fa;
 
 }
 
+
 .ai-message{
+    background:white;
+    padding:15px;
+    border-radius:18px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
 
-background:white;
+    max-width:85%;
+    width:fit-content;
 
-padding:15px;
+    color:#333;
+    line-height:1.6;
 
-border-radius:18px;
-
-margin-bottom:15px;
-
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
-
-max-width:85%;
-
-color:#333;
-
-line-height:1.6;
-
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    word-break:break-word;
 }
 
 .user-message{
