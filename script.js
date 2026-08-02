@@ -47,11 +47,30 @@ async function sendMessage() {
         }
 
         if (data.reply) {
-    const formattedReply = data.reply.replace(/\n/g, "<br>");
-    addMessage(formattedReply, "ai-message");
-   // speak(data.reply);
+
+    let reply = String(data.reply)
+        .replace(/\*\*/g, "")
+        .replace(/###/g, "")
+        .replace(/\n/g, "<br>");
+
+    addMessage(reply, "ai-message");
+
+    // Disable voice for now
+    // speak(data.reply);
+
 } else {
-    addMessage("⚠️ " + (data.error || "Unknown error"), "ai-message");
+
+    console.log(data);
+
+    let errText = "Unknown error";
+
+    if (typeof data.error === "string") {
+        errText = data.error;
+    } else if (typeof data.error === "object") {
+        errText = data.error.message || JSON.stringify(data.error);
+    }
+
+    addMessage("⚠️ " + errText, "ai-message");
 }
 
     } catch (error) {
