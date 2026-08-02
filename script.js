@@ -49,7 +49,7 @@ async function sendMessage() {
         if (data.reply) {
     const formattedReply = data.reply.replace(/\n/g, "<br>");
     addMessage(formattedReply, "ai-message");
-    speak(data.reply);
+   // speak(data.reply);
 } else {
     addMessage("⚠️ " + (data.error || "Unknown error"), "ai-message");
 }
