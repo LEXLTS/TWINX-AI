@@ -46,14 +46,7 @@ async function sendMessage() {
             chatBox.removeChild(typing);
         }
 
-        if (data.reply) {
-            const formattedReply = data.reply.replace(/\n/g, "<br>");
-            addMessage(formattedReply, "ai-message");
-            speak(data.reply);
-        } else {
-            const errText = typeof data.error === "object" ? JSON.stringify(data.error) : (data.error || "Unable to retrieve response.");
-            addMessage("⚠️ " + errText, "ai-message");
-        }
+        addMessage("<pre>" + JSON.stringify(data, null, 2) + "</pre>", "ai-message");
 
     } catch (error) {
         if (chatBox.contains(typing)) {
