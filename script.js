@@ -3,18 +3,15 @@ const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 const voiceBtn = document.getElementById("voiceBtn");
 
-// Send button
+// Event Listeners
 sendBtn.addEventListener("click", sendMessage);
 
-// Enter key
 userInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         sendMessage();
     }
 });
 
-
-// ✅ NEW CODE
 async function sendMessage() {
     const message = userInput.value.trim();
 
@@ -24,9 +21,10 @@ async function sendMessage() {
 
     userInput.value = "";
 
+    // Typing indicator updated to TWINX is typing...
     const typing = document.createElement("div");
     typing.className = "ai-message";
-    typing.innerHTML = "⌛ TWINX AI is thinking...";
+    typing.innerHTML = "⌛ TWINX is typing...";
 
     chatBox.appendChild(typing);
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -44,28 +42,28 @@ async function sendMessage() {
 
         const data = await response.json();
 
-        // Remove typing indicator before displaying reply
-        chatBox.removeChild(typing);
+        if (chatBox.contains(typing)) {
+            chatBox.removeChild(typing);
+        }
 
         if (data.reply) {
-            // Convert line breaks from Gemini to HTML line breaks
             const formattedReply = data.reply.replace(/\n/g, "<br>");
             addMessage(formattedReply, "ai-message");
             speak(data.reply);
         } else {
-            addMessage("⚠️ " + (data.error || "Unable to retrieve response."), "ai-message");
+            const errText = typeof data.error === "object" ? JSON.stringify(data.error) : (data.error || "Unable to retrieve response.");
+            addMessage("⚠️ " + errText, "ai-message");
         }
 
     } catch (error) {
         if (chatBox.contains(typing)) {
             chatBox.removeChild(typing);
         }
-        addMessage("❌ Unable to connect to TWINX AI.", "ai-message");
+        addMessage("❌ Unable to connect to TWINX.", "ai-message");
     }
 }
 
 function addMessage(text, className) {
-
     const message = document.createElement("div");
     message.className = className;
 
@@ -86,10 +84,8 @@ function addMessage(text, className) {
     message.appendChild(time);
 
     chatBox.appendChild(message);
-
     chatBox.scrollTop = chatBox.scrollHeight;
 }
- 
 
 // Voice Output
 function speak(text) {
@@ -107,40 +103,26 @@ window.SpeechRecognition ||
 window.webkitSpeechRecognition;
 
 if (SpeechRecognition) {
-
     const recognition = new SpeechRecognition();
-
     recognition.lang = "en-US";
 
     recognition.onresult = function(event) {
-
         const transcript = event.results[0][0].transcript;
-
         userInput.value = transcript;
-
         sendMessage();
     };
 
     voiceBtn.addEventListener("click", () => {
         recognition.start();
     });
-
 } else {
-
     voiceBtn.disabled = true;
     voiceBtn.innerHTML = "❌";
-
 }
 
-
-// ===============================
-// Smart Welcome Message
-// ===============================
-
+// Welcome Message
 window.onload = function () {
-
     const hour = new Date().getHours();
-
     let greeting = "";
 
     if (hour >= 5 && hour < 12) {
@@ -154,5 +136,4 @@ window.onload = function () {
     }
 
     addMessage(greeting, "ai-message");
-
 };
