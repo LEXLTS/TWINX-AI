@@ -162,12 +162,13 @@ color:#555;
 
 input{
     flex:1;
+    min-width:0;
     height:56px;
     border:none;
     outline:none;
     border-radius:30px;
     background:#f7f8fc;
-    padding:0 22px;
+    padding:0 18px;
     font-size:16px;
     box-shadow:0 6px 18px rgba(0,0,0,.05);
 }
