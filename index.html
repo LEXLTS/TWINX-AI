@@ -1,85 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TWINX AI</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TWINX</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="app">
+  <!-- Top Straight Banner -->
+  <header class="top-banner">
+    <div class="banner-left"></div>
+    <div class="banner-center">
+      <h1 class="brand-logo">TWINX</h1>
+    </div>
+    <div class="banner-right">
+      <button class="profile-btn" id="profileBtn" aria-label="User Profile">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" alt="User Profile Avatar" class="profile-avatar">
+      </button>
 
-    <!-- Header -->
+      <!-- Profile Dropdown & History Drawer -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="user-info">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" alt="User Avatar" class="dropdown-avatar">
+          <div>
+            <h3>User Profile</h3>
+            <p>user@twinx.app</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
 
-    <header class="top-bar">
-
-        <button class="menu-btn">
-            ☰
-        </button>
-
-        <div class="header-center">
-
-            <img src="assets/logo.jpg" class="logo">
-
-            <div class="title-box">
-
-                <h1>TWINX</h1>
-
-                <p id="statusText">🌍 Online</p>
-
-            </div>
-
+        <div class="menu-section">
+          <div class="menu-item"><span class="icon">❓</span> Help & FAQ</div>
+          <div class="menu-item"><span class="icon">💬</span> Send Feedback</div>
+          <div class="menu-item"><span class="icon">⚙️</span> Settings</div>
         </div>
 
-        <button class="history-btn">
-            ⋮
-        </button>
+        <hr class="divider">
 
-    </header>
+        <div class="history-section">
+          <h4>Chat History</h4>
+          <div class="history-item">
+            <span class="history-title">Support & Resistance Strategy</span>
+            <span class="history-date">1 day ago</span>
+          </div>
+          <div class="history-item">
+            <span class="history-title">Pine Script Indicator Setup</span>
+            <span class="history-date">3 days ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <!-- Chat Area -->
+  <!-- Main Chat Container -->
+  <main class="chat-container">
+    <div class="chat-stream" id="chatStream">
+      <!-- TWINX Welcome Message -->
+      <div class="message-row twinx">
+        <div class="avatar twinx-avatar">TWINX</div>
+        <div class="bubble twinx-bubble">
+          Hello! Welcome to TWINX. How can I assist you today?
+        </div>
+      </div>
 
-    <main
-        id="chatBox"
-        class="chat-box">
+      <!-- User Sample Message -->
+      <div class="message-row user">
+        <div class="bubble user-bubble">
+          Can you help me format this setup for my project?
+        </div>
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" alt="User" class="avatar user-avatar">
+      </div>
+    </div>
+  </main>
 
-    </main>
+  <!-- Bottom Input Bar -->
+  <footer class="input-container">
+    <div class="input-bar">
+      <label class="file-btn" for="fileInput" title="Attach file">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+        </svg>
+      </label>
+      <input type="file" id="fileInput" hidden>
 
-    <!-- Bottom Input -->
+      <input type="text" id="userInput" placeholder="Type a message..." autocomplete="off">
 
-    <footer class="input-bar">
+      <button class="send-btn" id="sendBtn" aria-label="Send message">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </footer>
 
-        <button class="attach-btn">
-            📎
-        </button>
-
-        <button class="image-btn">
-            🖼️
-        </button>
-
-        <input
-            id="userInput"
-            type="text"
-            placeholder="Message TWINX...">
-
-        <button
-            id="sendBtn">
-            ✈️
-        </button>
-
-    </footer>
-
-</div>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
-
 </html>
