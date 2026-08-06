@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TWINX </title>
+<title>TWINX</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,17 +14,19 @@
 
 <body>
 
-<div class="app">
+<div class="app-container">
 
     <!-- HEADER -->
 
-    <header class="top-bar">
+    <header class="top-header">
 
-        <div class="logo-side">
-            <img src="assets/logo.jpg" class="logo">
+        <div class="header-left">
+
+            <img src="assets/logo.jpg" class="logo" alt="TWINX Logo">
+
         </div>
 
-        <div class="title-side">
+        <div class="header-center">
 
             <h1>TWINX</h1>
 
@@ -32,96 +34,44 @@
 
         </div>
 
-        <button class="menu-btn">
+        <div class="header-right">
 
-            ☰
+            <button class="menu-btn">☰</button>
 
-        </button>
+        </div>
 
     </header>
 
 
     <!-- CHAT -->
 
-    <main id="chatBox" class="chat-box">
+    <main id="chatBox" class="chat-area">
 
     </main>
 
 
     <!-- INPUT -->
 
-    <footer class="input-bar">
+    <footer class="bottom-bar">
 
-        <button class="attach-btn">
-
+        <button class="attach-btn" id="fileBtn">
             📎
-
         </button>
 
-        <button class="image-btn">
-
+        <button class="image-btn" id="imageBtn">
             🖼️
-
         </button>
 
         <input
-        id="userInput"
-        type="text"
-        placeholder="Message TWINX...">
+            id="userInput"
+            type="text"
+            placeholder="Message TWINX...">
 
         <button id="sendBtn">
-
             ➤
-
         </button>
 
     </footer>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-        </div>
-
-    </div>
-
-    <button class="menu-btn">☰</button>
-
-</header>
-
-    <!-- Chat Area -->
-
-    <main id="chatBox" class="chat-box">
-
-        
-
-    </main>
-
-    <!-- Input Area -->
-
-    <div class="input-area">
-
-        <button class="attach-btn">
-            📎
-        </button>
-
-        <input
-        type="text"
-        id="userInput"
-        placeholder="Message TWINX ...">
-
-        <button
-        id="voiceBtn">
-            🎤
-        </button>
-
-        <button
-        id="sendBtn">
-            ➤
-        </button>
-
-    </div>
 
 </div>
 
