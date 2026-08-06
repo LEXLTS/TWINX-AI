@@ -1,157 +1,62 @@
-const chatBox = document.getElementById("chatBox");
-const userInput = document.getElementById("userInput");
-const sendBtn = document.getElementById("sendBtn");
-const voiceBtn = document.getElementById("voiceBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const profileBtn = document.getElementById("profileBtn");
+  const profileDropdown = document.getElementById("profileDropdown");
+  const sendBtn = document.getElementById("sendBtn");
+  const userInput = document.getElementById("userInput");
+  const chatStream = document.getElementById("chatStream");
 
-// Event Listeners
-sendBtn.addEventListener("click", sendMessage);
+  // Toggle profile dropdown
+  profileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    profileDropdown.classList.toggle("active");
+  });
 
-userInput.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+      profileDropdown.classList.remove("active");
     }
-});
+  });
 
-async function sendMessage() {
-    const message = userInput.value.trim();
+  // Send message function
+  function sendMessage() {
+    const text = userInput.value.trim();
+    if (!text) return;
 
-    if (message === "") return;
-
-    addMessage(message, "user-message");
+    // Render User Message (Light Green Bubble)
+    const userRow = document.createElement("div");
+    userRow.className = "message-row user";
+    userRow.innerHTML = `
+      <div class="bubble user-bubble">${escapeHtml(text)}</div>
+      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" alt="User" class="avatar user-avatar">
+    `;
+    chatStream.appendChild(userRow);
 
     userInput.value = "";
+    chatStream.scrollTop = chatStream.scrollHeight;
 
-    // Typing indicator updated to TWINX is typing...
-    const typing = document.createElement("div");
-    typing.className = "ai-message";
-    typing.innerHTML = "⌛ TWINX is typing...";
+    // Simulate TWINX AI Response (Light Orange Bubble)
+    setTimeout(() => {
+      const twinxRow = document.createElement("div");
+      twinxRow.className = "message-row twinx";
+      twinxRow.innerHTML = `
+        <div class="avatar twinx-avatar">TWINX</div>
+        <div class="bubble twinx-bubble">I received your message! Let me process that for you.</div>
+      `;
+      chatStream.appendChild(twinxRow);
+      chatStream.scrollTop = chatStream.scrollHeight;
+    }, 800);
+  }
 
-    chatBox.appendChild(typing);
-    chatBox.scrollTop = chatBox.scrollHeight;
+  sendBtn.addEventListener("click", sendMessage);
 
-    try {
-        const response = await fetch("https://twinx-ai-api.letchus43.workers.dev", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                prompt: message
-            })
-        });
-
-        const data = await response.json();
-
-        if (chatBox.contains(typing)) {
-            chatBox.removeChild(typing);
-        }
-
-        if (data.reply) {
-
-    let reply = String(data.reply)
-        .replace(/\*\*/g, "")
-        .replace(/###/g, "")
-        .replace(/\n/g, "<br>");
-
-    addMessage(reply, "ai-message");
-
-    // Disable voice for now
-    // speak(data.reply);
-
-} else {
-
-    console.log(data);
-
-    let errText = "Unknown error";
-
-    if (typeof data.error === "string") {
-        errText = data.error;
-    } else if (typeof data.error === "object") {
-        errText = data.error.message || JSON.stringify(data.error);
+  userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
     }
+  });
 
-    addMessage("⚠️ " + errText, "ai-message");
-}
-
-    } catch (error) {
-        if (chatBox.contains(typing)) {
-            chatBox.removeChild(typing);
-        }
-        addMessage("❌ Unable to connect to TWINX.", "ai-message");
-    }
-}
-
-function addMessage(text, className) {
-    const message = document.createElement("div");
-    message.className = className;
-
-    const messageText = document.createElement("div");
-    messageText.innerHTML = text;
-
-    const time = document.createElement("div");
-    time.className = "message-time";
-
-    const now = new Date();
-
-    time.innerHTML = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
-    message.appendChild(messageText);
-    message.appendChild(time);
-
-    chatBox.appendChild(message);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Voice Output
-function speak(text) {
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en-US";
-    speech.rate = 1;
-    speech.pitch = 1;
-
-    speechSynthesis.speak(speech);
-}
-
-// Voice Input
-const SpeechRecognition =
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-
-    recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        userInput.value = transcript;
-        sendMessage();
-    };
-
-    voiceBtn.addEventListener("click", () => {
-        recognition.start();
-    });
-} else {
-    voiceBtn.disabled = true;
-    voiceBtn.innerHTML = "❌";
-}
-
-// Welcome Message
-window.onload = function () {
-    const hour = new Date().getHours();
-    let greeting = "";
-
-    if (hour >= 5 && hour < 12) {
-        greeting = "🌅 Good Morning, TWINX!<br><br>I hope you have a wonderful day.<br><br>How can I help you today?";
-    } else if (hour >= 12 && hour < 17) {
-        greeting = "☀️ Good Afternoon, TWINX!<br><br>Ready to continue building your dreams?";
-    } else if (hour >= 17 && hour < 21) {
-        greeting = "🌆 Good Evening, TWINX!<br><br>Welcome back! What shall we build today?";
-    } else {
-        greeting = "🌙 Good Night, TWINX!<br><br>Don't forget to get enough rest.<br><br>Tomorrow we'll build something even more amazing!";
-    }
-
-    addMessage(greeting, "ai-message");
-};
+  function escapeHtml(string) {
+    return string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+});
