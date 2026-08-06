@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TWINX</title>
+<title>TWINX AI</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,51 +14,53 @@
 
 <body>
 
-<div class="app-container">
+<div class="app">
 
-    <!-- HEADER -->
+    <!-- Header -->
 
-    <header class="top-header">
+    <header class="top-bar">
 
-        <div class="header-left">
-
-            <img src="assets/logo.jpg" class="logo" alt="TWINX Logo">
-
-        </div>
+        <button class="menu-btn">
+            ☰
+        </button>
 
         <div class="header-center">
 
-            <h1>TWINX</h1>
+            <img src="assets/logo.jpg" class="logo">
 
-            <p id="statusText">🌍 Online</p>
+            <div class="title-box">
+
+                <h1>TWINX</h1>
+
+                <p id="statusText">🌍 Online</p>
+
+            </div>
 
         </div>
 
-        <div class="header-right">
-
-            <button class="menu-btn">☰</button>
-
-        </div>
+        <button class="history-btn">
+            ⋮
+        </button>
 
     </header>
 
+    <!-- Chat Area -->
 
-    <!-- CHAT -->
-
-    <main id="chatBox" class="chat-area">
+    <main
+        id="chatBox"
+        class="chat-box">
 
     </main>
 
+    <!-- Bottom Input -->
 
-    <!-- INPUT -->
+    <footer class="input-bar">
 
-    <footer class="bottom-bar">
-
-        <button class="attach-btn" id="fileBtn">
+        <button class="attach-btn">
             📎
         </button>
 
-        <button class="image-btn" id="imageBtn">
+        <button class="image-btn">
             🖼️
         </button>
 
@@ -67,7 +69,8 @@
             type="text"
             placeholder="Message TWINX...">
 
-        <button id="sendBtn">
+        <button
+            id="sendBtn">
             ➤
         </button>
 
